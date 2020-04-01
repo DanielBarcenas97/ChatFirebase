@@ -71,7 +71,7 @@ public class User {
     }
 
     public String getPhotoURL() {
-        return photoURL;
+        return photoURL != null ? photoURL : uri != null?  uri.toString() : "";
     }
 
     public String getMessagesUnread() {
