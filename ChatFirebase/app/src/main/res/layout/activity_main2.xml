@@ -22,12 +22,11 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgProfile"
-            android:layout_width="@dimen/common_notify_size"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/common_notify_size"
             android:src="@drawable/ic_emoticon_happy"
             app:civ_border_color="@color/blue_100"
-            app:civ_circle_background_color="@android:color/white"
-            ></de.hdodenhof.circleimageview.CircleImageView>
+            app:civ_circle_background_color="@android:color/white"></de.hdodenhof.circleimageview.CircleImageView>
 
     </com.google.android.material.appbar.AppBarLayout>
 
