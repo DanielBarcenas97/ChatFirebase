@@ -2,6 +2,7 @@ package com.example.chatfirebase.common.model.dataAccess;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 public class FirebaseRealtimeDatabaseAPI {
 
@@ -14,6 +15,8 @@ public class FirebaseRealtimeDatabaseAPI {
     public static final String PATH_REQUEST = "requests";
 
     private DatabaseReference mDatabaseReference;
+
+
 
     private static class SinglentonHolder{
        private static final FirebaseRealtimeDatabaseAPI INSTANCE = new FirebaseRealtimeDatabaseAPI();
@@ -41,6 +44,14 @@ public class FirebaseRealtimeDatabaseAPI {
     public  DatabaseReference getUserReferenceByUid(String uid){
         return getRootReference().child(PATH_USERS).child(uid);
 
+    }
+
+    public DatabaseReference getContactReference(String uid) {
+        return getUserReferenceByUid(uid).child(PATH_CONTACTS);
+    }
+
+    public DatabaseReference getRequestReference(String email) {
+        return getRootReference().child(PATH_REQUEST);
     }
 
 }
