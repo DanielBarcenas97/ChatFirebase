@@ -1,8 +1,14 @@
 package com.example.chatfirebase.common.model.dataAccess;
 
+import com.example.chatfirebase.common.Constants;
+import com.example.chatfirebase.common.pojo.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class FirebaseRealtimeDatabaseAPI {
 
@@ -15,6 +21,7 @@ public class FirebaseRealtimeDatabaseAPI {
     public static final String PATH_REQUEST = "requests";
 
     private DatabaseReference mDatabaseReference;
+
 
 
 
@@ -52,6 +59,24 @@ public class FirebaseRealtimeDatabaseAPI {
 
     public DatabaseReference getRequestReference(String email) {
         return getRootReference().child(PATH_REQUEST);
+    }
+
+    public void updateMyLastConnection(boolean online, String uid) {
+        updateMyLastConnection(online, "",uid);
+    }
+
+    public void updateMyLastConnection(boolean online, String uidFriend, String uid){
+        String lastConnectionWith = Constants.ONLINE_VALUE + SEPARATOR + uidFriend;
+        Map<String,Object> values = new HashMap<>();
+        values.put(User.LAST_CONNECTION_WITH,online? lastConnectionWith : ServerValue.TIMESTAMP);
+        getUserReferenceByUid(uid).updateChildren(values);
+
+        if (online){
+            getUserReferenceByUid(uid).child(User.LAST_CONNECTION_WITH).onDisconnect().setValue(ServerValue.TIMESTAMP);
+        }else{
+            getUserReferenceByUid(uid).child(User.LAST_CONNECTION_WITH).onDisconnect().cancel();
+        }
+
     }
 
 }

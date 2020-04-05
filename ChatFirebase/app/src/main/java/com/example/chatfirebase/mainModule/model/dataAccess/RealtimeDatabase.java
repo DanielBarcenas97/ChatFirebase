@@ -130,7 +130,7 @@ public class RealtimeDatabase {
         }
     }
 
-    public void onsubscribeToRequest(String email){
+    public void unsubscribeToRequest(String email){
         if (mRequestEventListener != null){
             final String emailEncoded = UtilsCommon.getEmailEncoded(email);
             mDatabaseAPI.getRequestReference(emailEncoded).removeEventListener(mRequestEventListener);
