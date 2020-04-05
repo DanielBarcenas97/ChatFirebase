@@ -14,9 +14,9 @@ public interface Main2Presenter {
     User getCurrentUser();
     void removeFriend(String friendUid);
 
-    void acceptRequest();
+    void acceptRequest(User user);
 
-    void denyRequest();
+    void denyRequest(User user);
     void onEventListener(Main2Event event);
 
 }

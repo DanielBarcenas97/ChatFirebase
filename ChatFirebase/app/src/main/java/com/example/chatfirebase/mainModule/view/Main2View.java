@@ -5,7 +5,7 @@ import com.example.chatfirebase.common.pojo.User;
 public interface Main2View {
     void friendAdded(User user);
     void friendUpdated(User user);
-    void friendRemove(User user);
+    void friendRemoved(User user);
 
     void requestAdded(User user);
     void requestUpdated(User user);
@@ -15,6 +15,6 @@ public interface Main2View {
     void showRequestAccepted(String username);
     void showRequestDenied();
 
-    void showFriendRemoved(User user);
+    void showFriendRemoved();
     void showError(int resMsg);
 }
