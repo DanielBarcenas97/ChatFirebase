@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.chatfirebase.R;
+import com.example.chatfirebase.common.model.BasicEventsCallBack;
 import com.example.chatfirebase.common.model.dataAccess.FirebaseRealtimeDatabaseAPI;
 import com.example.chatfirebase.common.pojo.User;
 import com.example.chatfirebase.common.utils.UtilsCommon;
@@ -11,6 +12,10 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class RealtimeDatabase {
 
@@ -132,7 +137,76 @@ public class RealtimeDatabase {
         }
     }
 
-    
+    public void removeUser(String friendUid, String myUid, final BasicEventsCallBack callback){
+
+        Map<String, Object> removeUserMap = new HashMap<>();
+
+        removeUserMap.put(myUid+"/"+FirebaseRealtimeDatabaseAPI.PATH_CONTACTS+"/"+friendUid,null);
+        removeUserMap.put(friendUid+"/"+FirebaseRealtimeDatabaseAPI.PATH_CONTACTS+"/"+myUid,null);
+
+        getUsersReference().updateChildren(removeUserMap, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                if (databaseError == null){
+                    callback.onSuccess();
+                }else
+                    callback.onError();
+            }
+        });
+
+    }
+
+
+    public void acceptRequest(User user, User myUser, final BasicEventsCallBack callback){
+        Map<String, Object> userRequestMap = new HashMap<>();
+        userRequestMap.put(User.USERNAME, user.getEmail());
+        userRequestMap.put(User.EMAIL, user.getEmail());
+        userRequestMap.put(User.PHOTO_URL, user.getPhotoURL());
+
+        Map<String, Object> myUserMap = new HashMap<>();
+        myUserMap.put(User.USERNAME, myUser.getEmail());
+        myUserMap.put(User.EMAIL, myUser.getEmail());
+        myUserMap.put(User.PHOTO_URL, myUser.getPhotoURL());
+
+        final String emailEncoded = UtilsCommon.getEmailEncoded(myUser.getEmail());
+
+        Map<String, Object> acceptRequest = new HashMap<>();
+
+        acceptRequest.put(FirebaseRealtimeDatabaseAPI.PATH_USERS+"/"+user.getUid()+"/"+
+                FirebaseRealtimeDatabaseAPI.PATH_CONTACTS+"/"+myUser.getUid(),myUserMap);
+
+        acceptRequest.put(FirebaseRealtimeDatabaseAPI.PATH_USERS+"/"+myUser.getUid()+"/"+
+                FirebaseRealtimeDatabaseAPI.PATH_CONTACTS+"/"+user.getUid(),userRequestMap);
+
+        acceptRequest.put(FirebaseRealtimeDatabaseAPI.PATH_USERS+"/"+emailEncoded+"/"+
+                user.getUid(),null);
+
+        mDatabaseAPI.getRootReference().updateChildren(acceptRequest, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                if (databaseError == null){
+                    callback.onSuccess();
+                }else{
+                    callback.onError();
+                }
+            }
+        });
+    }
+
+    public void denyRequest(User user, String myEmail, final BasicEventsCallBack callback){
+        final String emailEncoded = UtilsCommon.getEmailEncoded(myEmail);
+        mDatabaseAPI.getRequestReference(emailEncoded).child(user.getUid())
+                .removeValue(new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if (databaseError == null){
+                            callback.onSuccess();
+                        }else{
+                            callback.onError();
+                        }
+                    }
+                });
+    }
 
 
 }
