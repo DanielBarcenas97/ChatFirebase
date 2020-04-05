@@ -6,9 +6,11 @@ import androidx.annotation.Nullable;
 import com.example.chatfirebase.R;
 import com.example.chatfirebase.common.model.dataAccess.FirebaseRealtimeDatabaseAPI;
 import com.example.chatfirebase.common.pojo.User;
+import com.example.chatfirebase.common.utils.UtilsCommon;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 
 public class RealtimeDatabase {
 
@@ -22,11 +24,17 @@ public class RealtimeDatabase {
         mDatabaseAPI = FirebaseRealtimeDatabaseAPI.getInstance();
     }
 
+    /*References*/
+
     public FirebaseRealtimeDatabaseAPI getmDatabaseAPI() {
         return mDatabaseAPI;
     }
 
+    private DatabaseReference getUsersReference(){
+        return mDatabaseAPI.getRootReference().child(FirebaseRealtimeDatabaseAPI.PATH_USERS);
+    }
 
+    /*Public Methods*/
     public void suscribeToUserList(String myUid, final userEventListener listener){
 
         if(mUserEventListener == null){
@@ -106,8 +114,25 @@ public class RealtimeDatabase {
                 }
             };
         }
-
-        mDatabaseAPI.getRequestReference(email).addChildEventListener(mRequestEventListener);
+        final String emailEncoded = UtilsCommon.getEmailEncoded(email);
+        mDatabaseAPI.getRequestReference(emailEncoded).addChildEventListener(mRequestEventListener);
     }
+
+
+    public void onsubscribeToUsers(String uid){
+        if (mUserEventListener != null){
+            mDatabaseAPI.getContactReference(uid).removeEventListener(mUserEventListener);
+        }
+    }
+
+    public void onsubscribeToRequest(String email){
+        if (mRequestEventListener != null){
+            final String emailEncoded = UtilsCommon.getEmailEncoded(email);
+            mDatabaseAPI.getRequestReference(emailEncoded).removeEventListener(mRequestEventListener);
+        }
+    }
+
+    
+
 
 }
