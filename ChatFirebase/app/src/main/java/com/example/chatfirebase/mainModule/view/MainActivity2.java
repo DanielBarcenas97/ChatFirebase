@@ -1,4 +1,4 @@
-package com.example.chatfirebase.mainModule;
+package com.example.chatfirebase.mainModule.view;
 
 import android.os.Bundle;
 
