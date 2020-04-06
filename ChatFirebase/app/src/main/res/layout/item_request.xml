@@ -64,19 +64,19 @@
             card_view:layout_constraintTop_toTopOf = "parent"
             card_view:layout_constraintBottom_toBottomOf="parent">
 
-            <TextureView
+            <TextView
                 android:id="@+id/tvName"
                 style="@style/TextViewItemUser.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp">
-            </TextureView>
+            </TextView>
 
-            <TextureView
+            <TextView
                 android:id="@+id/tvEmail"
                 style="@style/TextViewItemUser.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp">
-            </TextureView>
+            </TextView>
 
 
 
