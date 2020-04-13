@@ -17,7 +17,7 @@ public class User {
     private String username;
     private String email;
     private String photoURL;
-    private String messagesUnread;
+    private int messagesUnread;
 
     @Exclude
     private String uid;
@@ -44,7 +44,7 @@ public class User {
         this.photoURL = photoURL;
     }
 
-    public void setMessagesUnread(String messagesUnread) {
+    public void setMessagesUnread(int messagesUnread) {
         this.messagesUnread = messagesUnread;
     }
 
@@ -74,7 +74,7 @@ public class User {
         return photoURL != null ? photoURL : uri != null?  uri.toString() : "";
     }
 
-    public String getMessagesUnread() {
+    public int getMessagesUnread() {
         return messagesUnread;
     }
 
