@@ -115,7 +115,7 @@ public class MainActivity2 extends AppCompatActivity implements OnItemClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.onResume();
+        //mPresenter.onResume();
         clearNotifications();
     }
 

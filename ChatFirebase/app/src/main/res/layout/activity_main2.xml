@@ -22,7 +22,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgProfile"
-            android:layout_width="wrap_content"
+            android:layout_width="46dp"
+            android:layout_marginLeft="15dp"
             android:layout_height="@dimen/common_notify_size"
             android:src="@drawable/ic_emoticon_happy"
             app:civ_border_color="@color/blue_100"
