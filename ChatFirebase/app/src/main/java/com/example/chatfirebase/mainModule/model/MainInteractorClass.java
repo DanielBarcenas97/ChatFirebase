@@ -24,7 +24,7 @@ public class MainInteractorClass implements InteractorMain {
 
     @Override
     public void subscribeToUserList() {
-        mDatabase.suscribeToUserList(getCurrentUser().getUid(), new userEventListener() {
+        mDatabase.subscribeUserList(getCurrentUser().getUid(), new userEventListener() {
             @Override
             public void onUserAdded(User user) {
                 post(Main2Event.USER_ADDED, user);
@@ -82,7 +82,7 @@ public class MainInteractorClass implements InteractorMain {
 
     @Override
     public void unsubscribeToUserList() {
-        mDatabase.onsubscribeToUsers(getCurrentUser().getUid());
+        mDatabase.unsubscribeToUser(getCurrentUser().getUid());
         mDatabase.unsubscribeToRequest(getCurrentUser().getEmail());
 
         changeConnectionStatus(Constants.OFFLINE);
