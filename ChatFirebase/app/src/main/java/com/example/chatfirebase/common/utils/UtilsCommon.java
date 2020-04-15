@@ -14,14 +14,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UtilsCommon {
 
-    /*Codificar un correp electronico */
+    /*
+     * Codificar un correo electronico
+     * */
 
     public static String getEmailEncoded(String email){
         String preKey  = email.replace("_","__");
         return  preKey.replace(".","_");
     }
 
-    /*Cargar imagnes basicas*/
+    /*
+     *  Cargar imágenes básicas
+     * */
     public static void loadImage(Context context, String url, ImageView target) {
 
         RequestOptions options = new RequestOptions()

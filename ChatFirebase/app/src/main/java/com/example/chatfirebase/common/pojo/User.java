@@ -9,7 +9,7 @@ public class User {
     public static final String USERNAME = "username";
     public static final String PHOTO_URL = "photoUrl";
     public static final String EMAIL = "email";
-    public static final String LAST_CONNECTION_WITH = "lasConnectionWith";
+    public static final String LAST_CONNECTION_WITH = "lastConnectionWith";
     public static final String MESSAGE_UNREAD = "messagesUnread";
     public static final String UID = "uid";
 
@@ -32,32 +32,6 @@ public class User {
         this.lastConnectionWith = lastConnectionWith;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPhotoURL(String photoURL) {
-        this.photoURL = photoURL;
-    }
-
-    public void setMessagesUnread(int messagesUnread) {
-        this.messagesUnread = messagesUnread;
-    }
-
-    @Exclude
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    @Exclude
-    public void setUri(Uri uri) {
-        this.uri = uri;
-    }
-
     public String getLastConnectionWith() {
         return lastConnectionWith;
     }
@@ -66,16 +40,34 @@ public class User {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getEmail() {
         return email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
     public String getPhotoURL() {
         return photoURL != null ? photoURL : uri != null?  uri.toString() : "";
     }
 
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
+
     public int getMessagesUnread() {
         return messagesUnread;
+    }
+
+
+    public void setMessagesUnread(int messagesUnread) {
+        this.messagesUnread = messagesUnread;
     }
 
     @Exclude
@@ -87,6 +79,15 @@ public class User {
         return uri;
     }
 
+    @Exclude
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    @Exclude
+    public void setUri(Uri uri) {
+        this.uri = uri;
+    }
 
     @Exclude
     public  String getUsernameValid(){
