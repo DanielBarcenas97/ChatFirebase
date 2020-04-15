@@ -7,7 +7,7 @@ import com.example.chatfirebase.LoginModule.events.LoginEvent;
 import com.example.chatfirebase.LoginModule.model.LoginInteractor;
 import com.example.chatfirebase.LoginModule.model.LoginInteractorClass;
 import com.example.chatfirebase.LoginModule.view.LoginView;
-import com.example.chatfirebase.LoginModule.view.MainActivity;
+import com.example.chatfirebase.LoginModule.view.LoginActivity;
 import com.example.chatfirebase.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -63,7 +63,7 @@ public class LoginPresenterClass implements LoginPresenter {
     public void result(int requestCode, int resultCode, Intent data) {
         if(resultCode == Activity.RESULT_OK){
             switch (requestCode){
-                case MainActivity.RC_SIGN_IN:
+                case LoginActivity.RC_SIGN_IN:
                     if(data != null){
                         mView.showLoginSucessfully(data);
                     }

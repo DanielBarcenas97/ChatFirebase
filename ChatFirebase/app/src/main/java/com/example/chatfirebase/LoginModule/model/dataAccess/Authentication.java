@@ -1,7 +1,6 @@
 package com.example.chatfirebase.LoginModule.model.dataAccess;
 
 import androidx.annotation.NonNull;
-
 import com.example.chatfirebase.common.model.dataAccess.FirebaseAuthenticationAPI;
 import com.example.chatfirebase.common.pojo.User;
 import com.google.firebase.auth.FirebaseAuth;
