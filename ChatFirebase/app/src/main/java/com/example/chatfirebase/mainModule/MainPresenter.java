@@ -1,9 +1,9 @@
 package com.example.chatfirebase.mainModule;
 
 import com.example.chatfirebase.common.pojo.User;
-import com.example.chatfirebase.mainModule.events.Main2Event;
+import com.example.chatfirebase.mainModule.events.MainEvent;
 
-public interface Main2Presenter {
+public interface MainPresenter {
 
     void onCreate();
     void onDestroy();
@@ -17,6 +17,6 @@ public interface Main2Presenter {
     void acceptRequest(User user);
 
     void denyRequest(User user);
-    void onEventListener(Main2Event event);
+    void onEventListener(MainEvent event);
 
 }

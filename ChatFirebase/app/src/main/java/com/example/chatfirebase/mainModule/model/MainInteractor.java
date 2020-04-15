@@ -2,7 +2,7 @@ package com.example.chatfirebase.mainModule.model;
 
 import com.example.chatfirebase.common.pojo.User;
 
-public interface InteractorMain {
+public interface MainInteractor {
 
     void subscribeToUserList();
     void unsubscribeToUserList();

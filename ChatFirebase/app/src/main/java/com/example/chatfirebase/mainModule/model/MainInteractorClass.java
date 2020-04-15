@@ -3,14 +3,14 @@ package com.example.chatfirebase.mainModule.model;
 import com.example.chatfirebase.common.Constants;
 import com.example.chatfirebase.common.model.BasicEventsCallBack;
 import com.example.chatfirebase.common.pojo.User;
-import com.example.chatfirebase.mainModule.events.Main2Event;
+import com.example.chatfirebase.mainModule.events.MainEvent;
 import com.example.chatfirebase.mainModule.model.dataAccess.Authentication;
 import com.example.chatfirebase.mainModule.model.dataAccess.RealtimeDatabase;
 import com.example.chatfirebase.mainModule.model.dataAccess.userEventListener;
 
 import org.greenrobot.eventbus.EventBus;
 
-public class MainInteractorClass implements InteractorMain {
+public class MainInteractorClass implements MainInteractor {
 
     private RealtimeDatabase mDatabase;
     private Authentication mAuthentication;
@@ -27,17 +27,17 @@ public class MainInteractorClass implements InteractorMain {
         mDatabase.subscribeUserList(getCurrentUser().getUid(), new userEventListener() {
             @Override
             public void onUserAdded(User user) {
-                post(Main2Event.USER_ADDED, user);
+                post(MainEvent.USER_ADDED, user);
             }
 
             @Override
             public void onUserRemoved(User user) {
-                post(Main2Event.USER_REMOVED,user);
+                post(MainEvent.USER_REMOVED,user);
             }
 
             @Override
             public void onUserUpdated(User user) {
-                post(Main2Event.USER_UPDATED,user);
+                post(MainEvent.USER_UPDATED,user);
             }
 
             @Override
@@ -49,24 +49,24 @@ public class MainInteractorClass implements InteractorMain {
         mDatabase.subscribeToRequest(getCurrentUser().getEmail(), new userEventListener() {
             @Override
             public void onUserAdded(User user) {
-                post(Main2Event.REQUEST_ACCEPTED,user);
+                post(MainEvent.REQUEST_ACCEPTED,user);
             }
 
             @Override
             public void onUserRemoved(User user) {
-                post(Main2Event.REQUEST_REMOVED,user);
+                post(MainEvent.REQUEST_REMOVED,user);
 
             }
 
             @Override
             public void onUserUpdated(User user) {
-                post(Main2Event.REQUEST_UPDATED,user);
+                post(MainEvent.REQUEST_UPDATED,user);
 
             }
 
             @Override
             public void onError(int resMsg) {
-                post(Main2Event.ERROR_SERVER);
+                post(MainEvent.ERROR_SERVER);
 
             }
         });
@@ -103,12 +103,12 @@ public class MainInteractorClass implements InteractorMain {
         mDatabase.removeUser(friendUid, getCurrentUser().getUid(), new BasicEventsCallBack() {
             @Override
             public void onSuccess() {
-                post(Main2Event.USER_REMOVED);
+                post(MainEvent.USER_REMOVED);
             }
 
             @Override
             public void onError() {
-                post(Main2Event.ERROR_SERVER);
+                post(MainEvent.ERROR_SERVER);
             }
         });
     }
@@ -118,12 +118,12 @@ public class MainInteractorClass implements InteractorMain {
         mDatabase.acceptRequest(user, getCurrentUser(), new BasicEventsCallBack() {
             @Override
             public void onSuccess() {
-                post(Main2Event.REQUEST_ACCEPTED,user);
+                post(MainEvent.REQUEST_ACCEPTED,user);
             }
 
             @Override
             public void onError() {
-                post(Main2Event.ERROR_SERVER);
+                post(MainEvent.ERROR_SERVER);
 
             }
         });
@@ -135,12 +135,12 @@ public class MainInteractorClass implements InteractorMain {
         mDatabase.denyRequest(user, getCurrentUser().getEmail(), new BasicEventsCallBack() {
             @Override
             public void onSuccess() {
-                post(Main2Event.REQUEST_DENIED);
+                post(MainEvent.REQUEST_DENIED);
             }
 
             @Override
             public void onError() {
-                post(Main2Event.ERROR_SERVER);
+                post(MainEvent.ERROR_SERVER);
             }
         });
 
@@ -152,7 +152,7 @@ public class MainInteractorClass implements InteractorMain {
 
 
     private void post(int typeEvent, User user, int resMsg) {
-        Main2Event event =  new Main2Event();
+        MainEvent event =  new MainEvent();
         event.setTypeEvent(typeEvent);
         event.setUser(user);
         event.setResMsg(resMsg);
@@ -162,7 +162,7 @@ public class MainInteractorClass implements InteractorMain {
     }
 
     private void postError(int resMsg) {
-        post(Main2Event.ERROR_SERVER,null ,resMsg);
+        post(MainEvent.ERROR_SERVER,null ,resMsg);
     }
 
     private void post(int typeEvent) {

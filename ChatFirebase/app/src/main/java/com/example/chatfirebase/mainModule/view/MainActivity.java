@@ -4,7 +4,6 @@ import android.app.NotificationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.chatfirebase.R;
 import com.example.chatfirebase.common.pojo.User;
 import com.example.chatfirebase.common.utils.UtilsCommon;
-import com.example.chatfirebase.mainModule.Main2Presenter;
-import com.example.chatfirebase.mainModule.Main2PresenterClass;
+import com.example.chatfirebase.mainModule.MainPresenter;
+import com.example.chatfirebase.mainModule.MainPresenterClass;
 import com.example.chatfirebase.mainModule.view.adapters.OnItemClickListener;
 import com.example.chatfirebase.mainModule.view.adapters.RequestAdapter;
 import com.example.chatfirebase.mainModule.view.adapters.UserAdapter;
@@ -30,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity2 extends AppCompatActivity implements OnItemClickListener, Main2View {
+public class MainActivity extends AppCompatActivity implements OnItemClickListener, MainView {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -48,7 +47,7 @@ public class MainActivity2 extends AppCompatActivity implements OnItemClickListe
     private UserAdapter mUserAdapter;
     private RequestAdapter mRequestAdapter;
 
-    private Main2Presenter mPresenter;
+    private MainPresenter mPresenter;
 
     private User mUser;
 
@@ -58,7 +57,7 @@ public class MainActivity2 extends AppCompatActivity implements OnItemClickListe
         setContentView(R.layout.activity_main2);
         ButterKnife.bind(this);
 
-        mPresenter = new Main2PresenterClass(this);
+        mPresenter = new MainPresenterClass(this);
         mPresenter.onCreate();
         mUser = mPresenter.getCurrentUser();
 

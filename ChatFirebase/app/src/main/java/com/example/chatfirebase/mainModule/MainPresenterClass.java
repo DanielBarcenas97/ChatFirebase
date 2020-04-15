@@ -1,20 +1,20 @@
 package com.example.chatfirebase.mainModule;
 
 import com.example.chatfirebase.common.pojo.User;
-import com.example.chatfirebase.mainModule.events.Main2Event;
-import com.example.chatfirebase.mainModule.model.InteractorMain;
+import com.example.chatfirebase.mainModule.events.MainEvent;
+import com.example.chatfirebase.mainModule.model.MainInteractor;
 import com.example.chatfirebase.mainModule.model.MainInteractorClass;
-import com.example.chatfirebase.mainModule.view.Main2View;
+import com.example.chatfirebase.mainModule.view.MainView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-public class Main2PresenterClass implements Main2Presenter {
-    private Main2View mView;
-    private InteractorMain mInteractor;
+public class MainPresenterClass implements MainPresenter {
+    private MainView mView;
+    private MainInteractor mInteractor;
 
 
-    public Main2PresenterClass(Main2View mView) {
+    public MainPresenterClass(MainView mView) {
         this.mView = mView;
         this.mInteractor = new MainInteractorClass();
     }
@@ -81,40 +81,40 @@ public class Main2PresenterClass implements Main2Presenter {
 
     @Subscribe
     @Override
-    public void onEventListener(Main2Event event) {
+    public void onEventListener(MainEvent event) {
         if (mView != null){
             User user = event.getUser();
 
             switch (event.getTypeEvent()){
-                case Main2Event.USER_ADDED:
+                case MainEvent.USER_ADDED:
                     mView.friendAdded(user);
                     break;
-                case  Main2Event.USER_UPDATED:
+                case  MainEvent.USER_UPDATED:
                     mView.friendUpdated(user);
                     break;
-                case Main2Event.USER_REMOVED:
+                case MainEvent.USER_REMOVED:
                     if (user != null){
                         mView.friendRemoved(user);
                     }else{
                         mView.showFriendRemoved();
                     }
                     break;
-                case Main2Event.REQUEST_ADDED:
+                case MainEvent.REQUEST_ADDED:
                     mView.requestAdded(user);
                     break;
-                case Main2Event.REQUEST_UPDATED:
+                case MainEvent.REQUEST_UPDATED:
                     mView.requestUpdated(user);
                     break;
-                case Main2Event.REQUEST_REMOVED:
+                case MainEvent.REQUEST_REMOVED:
                     mView.requestRemove(user);
                     break;
-                case Main2Event.REQUEST_ACCEPTED:
+                case MainEvent.REQUEST_ACCEPTED:
                     mView.showRequestAccepted(user.getUsername());
                     break;
-                case Main2Event.REQUEST_DENIED:
+                case MainEvent.REQUEST_DENIED:
                     mView.showRequestDenied();
                     break;
-                case Main2Event.ERROR_SERVER:
+                case MainEvent.ERROR_SERVER:
                     mView.showError(event.getResMsg());
                     break;
             }

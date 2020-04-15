@@ -2,7 +2,7 @@ package com.example.chatfirebase.mainModule.events;
 
 import com.example.chatfirebase.common.pojo.User;
 
-public class Main2Event {
+public class MainEvent {
 
 
     public static final int USER_ADDED = 0;
@@ -19,7 +19,7 @@ public class Main2Event {
     private int typeEvent;
     private int resMsg;
 
-    public Main2Event(){
+    public MainEvent(){
 
     }
 
