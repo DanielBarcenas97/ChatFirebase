@@ -11,46 +11,35 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FirebaseRealtimeDatabaseAPI {
-
     public static final String SEPARATOR = "___&___";
-
     public static final String PATH_USERS = "users";
-
     public static final String PATH_CONTACTS = "contacts";
-
-    public static final String PATH_REQUEST = "requests";
+    public static final String PATH_REQUESTS = "requests";
 
     private DatabaseReference mDatabaseReference;
 
+    private static class SingletonHolder{
 
-
-
-    private static class SinglentonHolder{
-       private static final FirebaseRealtimeDatabaseAPI INSTANCE = new FirebaseRealtimeDatabaseAPI();
+        private static final FirebaseRealtimeDatabaseAPI INSTANCE = new FirebaseRealtimeDatabaseAPI();
     }
-
-    public static FirebaseRealtimeDatabaseAPI getInstance() {
-        return SinglentonHolder.INSTANCE;
+    public static FirebaseRealtimeDatabaseAPI getInstance(){
+        return SingletonHolder.INSTANCE;
     }
 
     private FirebaseRealtimeDatabaseAPI(){
-
         this.mDatabaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
 
     /*
-    References
-     */
-
-
+     * Reference
+     * */
     public DatabaseReference getRootReference(){
         return mDatabaseReference.getRoot();
     }
 
-    public  DatabaseReference getUserReferenceByUid(String uid){
+    public DatabaseReference getUserReferenceByUid(String uid){
         return getRootReference().child(PATH_USERS).child(uid);
-
     }
 
     public DatabaseReference getContactReference(String uid) {
@@ -58,25 +47,24 @@ public class FirebaseRealtimeDatabaseAPI {
     }
 
     public DatabaseReference getRequestReference(String email) {
-        return getRootReference().child(PATH_REQUEST).child(email);
+        return getRootReference().child(PATH_REQUESTS).child(email);
     }
 
     public void updateMyLastConnection(boolean online, String uid) {
-        updateMyLastConnection(online, "",uid);
+        updateMyLastConnection(online, "", uid);
     }
 
     public void updateMyLastConnection(boolean online, String uidFriend, String uid){
         String lastConnectionWith = Constants.ONLINE_VALUE + SEPARATOR + uidFriend;
-        Map<String,Object> values = new HashMap<>();
-        values.put(User.LAST_CONNECTION_WITH,online? lastConnectionWith : ServerValue.TIMESTAMP);
+        Map<String, Object> values = new HashMap<>();
+        values.put(User.LAST_CONNECTION_WITH, online? lastConnectionWith : ServerValue.TIMESTAMP);
         getUserReferenceByUid(uid).updateChildren(values);
 
-        if (online){
-            getUserReferenceByUid(uid).child(User.LAST_CONNECTION_WITH).onDisconnect().setValue(ServerValue.TIMESTAMP);
+        if(online){
+            getUserReferenceByUid(uid).child(User.LAST_CONNECTION_WITH).onDisconnect()
+                    .setValue(ServerValue.TIMESTAMP);
         }else{
             getUserReferenceByUid(uid).child(User.LAST_CONNECTION_WITH).onDisconnect().cancel();
         }
-
     }
-
 }

@@ -15,6 +15,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chatfirebase.LoginModule.view.LoginActivity;
 import com.example.chatfirebase.R;
 import com.example.chatfirebase.common.pojo.User;
 import com.example.chatfirebase.common.utils.UtilsCommon;
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         switch (item.getItemId()){
             case R.id.action_logout:
                 mPresenter.signOff();
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                         | Intent.FLAG_ACTIVITY_NEW_TASK
                         | Intent.FLAG_ACTIVITY_CLEAR_TASK);

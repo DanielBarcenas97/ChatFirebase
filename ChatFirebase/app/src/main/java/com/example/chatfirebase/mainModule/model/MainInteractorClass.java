@@ -156,7 +156,6 @@ public class MainInteractorClass implements MainInteractor {
         event.setTypeEvent(typeEvent);
         event.setUser(user);
         event.setResMsg(resMsg);
-
         EventBus.getDefault().post(event);
 
     }

@@ -169,7 +169,7 @@ public class RealtimeDatabase {
                 FirebaseRealtimeDatabaseAPI.PATH_CONTACTS+"/"+myUser.getUid(), myUserMap);
         acceptRequest.put(FirebaseRealtimeDatabaseAPI.PATH_USERS+"/"+myUser.getUid()+"/"+
                 FirebaseRealtimeDatabaseAPI.PATH_CONTACTS+"/"+user.getUid(), userRequestMap);
-        acceptRequest.put(FirebaseRealtimeDatabaseAPI.PATH_REQUEST+"/"+emailEnooded+"/"+
+        acceptRequest.put(FirebaseRealtimeDatabaseAPI.PATH_REQUESTS+"/"+emailEnooded+"/"+
                 user.getUid(), null);
 
         mDatabaseAPI.getRootReference().updateChildren(acceptRequest, new DatabaseReference.CompletionListener() {
