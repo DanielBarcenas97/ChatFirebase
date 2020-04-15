@@ -37,7 +37,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_request,
                 viewGroup, false);
         mContext = viewGroup.getContext();
@@ -109,7 +109,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this.itemView);
+            ButterKnife.bind(this, itemView);  //checar
         }
 
         void setOnClickListener(User user, OnItemClickListener Listener){

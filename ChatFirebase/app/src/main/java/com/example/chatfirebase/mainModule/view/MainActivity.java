@@ -1,11 +1,14 @@
 package com.example.chatfirebase.mainModule.view;
 
 import android.app.NotificationManager;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -24,6 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -99,6 +103,12 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_logout:
+                mPresenter.signOff();
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 break;
 
             case R.id.action_profile:
@@ -201,8 +211,19 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     @Override
-    public void onItemLongClick(User user) {
-        mPresenter.removeFriend(user.getUid());
+    public void onItemLongClick(final User user) {
+        new AlertDialog.Builder(this, R.style.DialogFragmentTheme)
+                .setTitle(getString(R.string.main_dialog_title_confirmDelete))
+                .setMessage(String.format(Locale.ROOT, getString(R.string.main_dialog_message_confirmDelete),
+                        user.getUsernameValid()))
+                .setPositiveButton(R.string.main_dialog_accept, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mPresenter.removeFriend(user.getUid());
+                    }
+                })
+                .setNegativeButton(R.string.common_label_cancel, null)
+                .show();
     }
 
     @Override

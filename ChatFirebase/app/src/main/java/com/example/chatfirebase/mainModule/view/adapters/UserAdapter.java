@@ -23,12 +23,8 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-
-
-
     private List<User> mUsers;
     private Context mContext;
-
     private OnItemClickListener mListener;
 
     public UserAdapter(List<User> mUsers, OnItemClickListener mListener) {
