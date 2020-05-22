@@ -9,6 +9,6 @@ import random
 def execute(*args):
     var=args[0]
     opts=args[1]
-    msg = random.choice(['hola','buen día','chevere','buenas tardes']+opts)
+    msg = random.choice(['hola','buen día','chevere','buenas tardes','prueba 1','prueba 2']+opts)
     return 'set_slot {0} "{1}"'.format(var,msg)
 

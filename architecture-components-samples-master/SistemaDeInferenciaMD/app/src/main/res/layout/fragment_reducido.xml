@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Textura"
+                android:textSize="15sp" />
+
+            <EditText
+                android:layout_width="105dp"
+                android:id="@+id/texture"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Concavidad"
+                android:textSize="15sp" />
+
+            <EditText
+                android:layout_width="105dp"
+                android:id="@+id/concavidad"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/rea"
+                android:textSize="15sp" />
+
+            <EditText
+                android:layout_width="105dp"
+                android:id="@+id/area"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/simetria"
+                android:textSize="15sp" />
+
+            <EditText
+                android:layout_width="105dp"
+                android:id="@+id/simetria"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/compacidad"
+                android:textSize="15sp" />
+
+            <EditText
+                android:layout_width="105dp"
+                android:id="@+id/compacidad"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:lines="3"
+                android:text="@string/dimension_fractal"
+                android:textSize="15sp" />
+
+            <EditText
+                android:layout_width="105dp"
+                android:id="@+id/dimensionFractal"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="#4CAF50"
+            android:textSize="20dp"
+            android:id="@+id/buttonPredecir"
+            android:textColor="@color/design_default_color_surface"
+            android:text="@string/predecir" />
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="#8BC34A"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:id="@+id/mensaje"
+            android:text="@string/tumor_benigno"
+            android:textColor="#0C0C0C"
+            android:visibility="invisible" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

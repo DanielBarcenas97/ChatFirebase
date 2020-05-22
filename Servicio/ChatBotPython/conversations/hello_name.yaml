@@ -24,18 +24,25 @@ strategies:
         - say "me da mucho gusto que estés bien."
     sorry:
         - say "siento mucho que estes mal. "
-    sorry2:
-        - say "siento mucho que estes mal Erick perrote. "
+    soso:
+        - say "siento mucho que estes mal Daniii perrote. "
 
 script:
     - solve hello
     - say greeting
     - loop_slots
     - say "¿Que negocio quieres {}?".format(name)
-    - input status | asign bien:good mal:bad
+    - input status | asign bien:good mal:bad regular:moreLess
     - if status == "good" solve excelent
-    - if status == "bad" solve sorry2
+    - if status == "bad" solve sorry
+    - if status == "moreLess" solve soso
+    - say "¿Que Comiste hoy {}?".format(name)
+    - input status | asign carne:good pescado:bad pollo:moreLess
+    - if status == "good" solve excelent
+    - if status == "bad" solve sorry
+    - if status == "moreLess" solve soso
+    - while true
     - say "Hay algunas cosas que se Que negocio buscas hoy En que red social quieres valer popo"
-    - say "hecho {} {}".format(*db['main'][0])
+    - say "hecho {} {}".format(*db['main'][1])
     - say "adios {}".format(name)
   
